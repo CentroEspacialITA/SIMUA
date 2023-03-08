@@ -5,6 +5,18 @@ name = "pypi"
 
 [packages]
 pandas = "*"
+tensorflow = "*"
+pillow = "*"
+matplotlib = "*"
+numpy = "*"
+opencv-python = "*"
+tqdm = "*"
+seaborn = "*"
+scikit-learn = "*"
+ann-visualizer = "*"
+graphviz = "*"
+mlxtend = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
