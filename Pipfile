@@ -17,6 +17,8 @@ ann-visualizer = "*"
 graphviz = "*"
 mlxtend = "*"
 python-dotenv = "*"
+asyncio = "*"
+aiohttp = "*"
 
 [dev-packages]
 
