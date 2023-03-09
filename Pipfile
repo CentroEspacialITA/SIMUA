@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pandas = "*"
+tensorflow = "*"
+pillow = "*"
+matplotlib = "*"
+numpy = "*"
+opencv-python = "*"
+tqdm = "*"
+seaborn = "*"
+scikit-learn = "*"
+ann-visualizer = "*"
+graphviz = "*"
+mlxtend = "*"
+python-dotenv = "*"
+asyncio = "*"
+aiohttp = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
