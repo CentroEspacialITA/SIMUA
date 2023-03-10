@@ -2,9 +2,7 @@ import env
 import requests
 import json
 
-def callAPI(
-        LAT=-27.670279,
-        LONG=-48.552502):
+def callAPI():
     """
     Pass US Zipcode, UK Postcode, Canada Postalcode, IP address, 
     Latitude/Longitude (decimal degree) or city name
@@ -14,7 +12,7 @@ def callAPI(
     constants = env.environment()
 
     # creating URL
-    endpoint = f"/v1/forecast.json?key={constants['accessKey']}&q={LAT},{LONG}&days=1&aqi=yes&alerts=yes"
+    endpoint = f"/v1/forecast.json?key={constants['accessKey']}&q={constants['LAT']},{constants['LONG']}&days=1&aqi=yes&alerts=yes"
     url = constants["protocol"] + constants["baseUrl"] + endpoint
 
     # calling API
