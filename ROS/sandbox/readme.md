@@ -1,6 +1,12 @@
 # 🔴 ROS 2 (Humble) 🔴
 
-**Obs: you can run ```auto-gen.bash``` (linux) for an auto generated environment, otherwise follow the instructions below**
+**Obs: you can run ```auto-gen.sh``` (linux) for an auto generated environment using:
+
+```
+sudo bash auto-gen.sh
+```
+
+, otherwise follow the instructions below**
 
 --- 
 ## ✅ How to Create a ROS Environment (Sandbox)
