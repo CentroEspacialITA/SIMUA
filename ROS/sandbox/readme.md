@@ -1,5 +1,7 @@
 # 🔴 ROS 2 (Humble) 🔴
 
+**Obs: you can run ```auto-gen.bash``` (linux) for an auto generated environment, otherwise follow the instructions below**
+
 --- 
 ## ✅ How to Create a ROS Environment (Sandbox)
 The main tutorial can be find here: https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html
