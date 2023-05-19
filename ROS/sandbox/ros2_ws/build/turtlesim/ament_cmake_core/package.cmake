@@ -1,5 +1,5 @@
 set(_AMENT_PACKAGE_NAME "turtlesim")
-set(turtlesim_VERSION "1.4.1")
+set(turtlesim_VERSION "1.4.2")
 set(turtlesim_MAINTAINER "Audrow Nash <audrow@openrobotics.org>, Michael Jeronimo <michael.jeronimo@openrobotics.org>")
 set(turtlesim_BUILD_DEPENDS "qt5-qmake" "qtbase5-dev" "ament_index_cpp" "geometry_msgs" "rclcpp" "rclcpp_action" "std_msgs" "std_srvs")
 set(turtlesim_BUILDTOOL_DEPENDS "ament_cmake" "rosidl_default_generators")

@@ -1,8 +1,8 @@
-/home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:action/RotateAbsolute.idl
-/home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:msg/Color.idl
-/home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:msg/Pose.idl
-/home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:srv/Kill.idl
-/home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:srv/SetPen.idl
-/home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:srv/Spawn.idl
-/home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:srv/TeleportAbsolute.idl
-/home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:srv/TeleportRelative.idl
+/home/noetic-sierra/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:action/RotateAbsolute.idl
+/home/noetic-sierra/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:msg/Color.idl
+/home/noetic-sierra/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:msg/Pose.idl
+/home/noetic-sierra/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:srv/Kill.idl
+/home/noetic-sierra/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:srv/SetPen.idl
+/home/noetic-sierra/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:srv/Spawn.idl
+/home/noetic-sierra/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:srv/TeleportAbsolute.idl
+/home/noetic-sierra/ros2_ws/build/turtlesim/rosidl_adapter/turtlesim:srv/TeleportRelative.idl

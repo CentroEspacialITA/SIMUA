@@ -1,8 +1,8 @@
-# Install script for directory: /home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim/turtlesim__py
+# Install script for directory: /home/noetic-sierra/ros2_ws/build/turtlesim/turtlesim__py
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/install/turtlesim")
+  set(CMAKE_INSTALL_PREFIX "/home/noetic-sierra/ros2_ws/install/turtlesim")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

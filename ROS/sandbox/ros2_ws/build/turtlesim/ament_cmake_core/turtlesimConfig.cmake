@@ -16,7 +16,7 @@ set(_turtlesim_CONFIG_INCLUDED TRUE)
 
 # output package information
 if(NOT turtlesim_FIND_QUIETLY)
-  message(STATUS "Found turtlesim: 1.4.1 (${turtlesim_DIR})")
+  message(STATUS "Found turtlesim: 1.4.2 (${turtlesim_DIR})")
 endif()
 
 # warn when using a deprecated package

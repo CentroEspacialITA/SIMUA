@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/src/ros_tutorials/turtlesim
+CMAKE_SOURCE_DIR = /home/noetic-sierra/ros2_ws/src/ros_tutorials/turtlesim
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim
+CMAKE_BINARY_DIR = /home/noetic-sierra/ros2_ws/build/turtlesim
 
 # Utility rule file for ament_cmake_python_copy_turtlesim.
 
@@ -67,7 +67,7 @@ include CMakeFiles/ament_cmake_python_copy_turtlesim.dir/compiler_depend.make
 include CMakeFiles/ament_cmake_python_copy_turtlesim.dir/progress.make
 
 CMakeFiles/ament_cmake_python_copy_turtlesim:
-	/usr/bin/cmake -E copy_directory /home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim/rosidl_generator_py/turtlesim /home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim/ament_cmake_python/turtlesim/turtlesim
+	/usr/bin/cmake -E copy_directory /home/noetic-sierra/ros2_ws/build/turtlesim/rosidl_generator_py/turtlesim /home/noetic-sierra/ros2_ws/build/turtlesim/ament_cmake_python/turtlesim/turtlesim
 
 ament_cmake_python_copy_turtlesim: CMakeFiles/ament_cmake_python_copy_turtlesim
 ament_cmake_python_copy_turtlesim: CMakeFiles/ament_cmake_python_copy_turtlesim.dir/build.make
@@ -82,6 +82,6 @@ CMakeFiles/ament_cmake_python_copy_turtlesim.dir/clean:
 .PHONY : CMakeFiles/ament_cmake_python_copy_turtlesim.dir/clean
 
 CMakeFiles/ament_cmake_python_copy_turtlesim.dir/depend:
-	cd /home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/src/ros_tutorials/turtlesim /home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/src/ros_tutorials/turtlesim /home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim /home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim /home/noetic-sierra/Downloads/SIMUA/ROS/sandbox/ros2_ws/build/turtlesim/CMakeFiles/ament_cmake_python_copy_turtlesim.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/noetic-sierra/ros2_ws/build/turtlesim && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/noetic-sierra/ros2_ws/src/ros_tutorials/turtlesim /home/noetic-sierra/ros2_ws/src/ros_tutorials/turtlesim /home/noetic-sierra/ros2_ws/build/turtlesim /home/noetic-sierra/ros2_ws/build/turtlesim /home/noetic-sierra/ros2_ws/build/turtlesim/CMakeFiles/ament_cmake_python_copy_turtlesim.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ament_cmake_python_copy_turtlesim.dir/depend
 
