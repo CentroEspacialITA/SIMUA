@@ -15,8 +15,9 @@ def run(path):
     outfile = open(path, 'w')
     try:
         print('Recording measurments... Press Crl+C to stop.')
-        for measurment in lidar.iter_measurments():
-            line = '\t'.join(str(v) for v in measurment)
+        for m in lidar.iter_measures():
+            print(m)
+            line = '\t'.join(str(v) for v in m)
             outfile.write(line + '\n')
     except KeyboardInterrupt:
         print('Stoping.')
