@@ -111,13 +111,14 @@ class Lidar():
         except KeyboardInterrupt:
             print('\nStoping...\n')
         
-        # converts data object to JSON format and saves into a file
-        path='./output'
-        os.makedirs(path,exist_ok=True)
-        jsonFilePath=os.path.join(path, "lidar-data.json")
-        with open(jsonFilePath, "w") as json_file:
-            json.dump(data, json_file, indent=4)
-        print(f"\nJSON file saved at: {jsonFilePath}\n")
+        if saveInDisk==True:
+            # converts data object to JSON format and saves into a file
+            path='./output'
+            os.makedirs(path,exist_ok=True)
+            jsonFilePath=os.path.join(path, "lidar-data.json")
+            with open(jsonFilePath, "w") as json_file:
+                json.dump(data, json_file, indent=4)
+            print(f"\nJSON file saved at: {jsonFilePath}\n")
         
         lidar.stop()
         lidar.disconnect()
