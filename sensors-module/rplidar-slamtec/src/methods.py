@@ -1,5 +1,4 @@
 from rplidar import RPLidar
-import pandas as pd
 import time
 import json
 import os
@@ -49,8 +48,13 @@ class Lidar():
         return lidar,params
     
     @classmethod
-    def getLidarData(cls,enableROS=True,renderPlot=False):
+    def getLidarData(cls,saveInDisk=True,enableROS=True,renderPlot=False):
         """
+        Args:
+        saveInDisk: if True it generates a json file as output from the fetched Data
+        enableROS: if True it enables the ROS service as a msg publisher
+        renderPlot: if True it shows an animated radar plot with the mapped points cloud (2D)
+        
         1. iter_measures() method:
         Yields
         ------
@@ -103,7 +107,7 @@ class Lidar():
                 data['frequency_hz'].append(round(1/delta,3))
                 data['rotation_rpm'].append(round(60/delta,3))
                 old_t=now
-                
+
         except KeyboardInterrupt:
             print('\nStoping...\n')
         
