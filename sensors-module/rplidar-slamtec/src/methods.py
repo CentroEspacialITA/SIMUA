@@ -1,12 +1,15 @@
 from rplidar import RPLidar
+import pandas as pd
 import time
+import json
+import os
 
-class RPLidar():
+class Lidar():
     def __init__(self):
-        super(RPLidar,self).__init__()
+        super(Lidar,self).__init__()
     
     @classmethod
-    def lidarParams(self):
+    def lidarParams(cls):
         """
         The parameters DMAX, IMIN, and IMAX in your script are used to define certain properties of the plot and how the lidar scan data is visualized:
 
@@ -24,21 +27,95 @@ class RPLidar():
             "imax":100
         }
         lidar=RPLidar(params["port-name"])
+        lidar.clean_input()
+        
+        print(f"""
+           _____ __    ___    __  _____________________
+          / ___// /   /   |  /  |/  /_  __/ ____/ ____/
+          \__ \/ /   / /| | / /|_/ / / / / __/ / /     
+         ___/ / /___/ ___ |/ /  / / / / / /___/ /___   
+        /____/_____/_/  |_/_/  /_/ /_/ /_____/\____/   
+                                                    RPLIDAR
+                                             
+        [lidar info]
+            # model: {lidar.get_info()['model']}
+            # firmware: {lidar.get_info()['firmware']}
+            # hardware: {lidar.get_info()['hardware']}
+            # serial-no: {lidar.get_info()['serialnumber']}
+            # status: {lidar.get_health()}
+        """)
+        
         lidar.start_motor()
         return lidar,params
     
-    def getLidarData(self):
+    @classmethod
+    def getLidarData(cls,enableROS=True,renderPlot=False):
+        """
+        1. iter_measures() method:
+        Yields
+        ------
+        - new_scan : bool
+            True if measures belongs to a new scan
+        - quality : int
+            Reflected laser pulse strength
+        - angle : float
+            The measure heading angle in degree unit [0, 360)
+        - distance : float
+            Measured object distance related to the sensor's rotation center.
+            In millimeter unit. Set to 0 when measure is invalid.
         
-        lidar=self.lidarParams[0]
-
-        data=[]
+        2. iter_scans() method:
+        Yields
+        ------
+        - scan : list
+            List of the measures. Each measurment is tuple with following
+            format: (quality, angle, distance). For values description please
+            refer to `iter_measures` method's documentation.
+        """
+        
+        lidar,_=cls.lidarParams()
         old_t = None
+        valuesList=[]
+        data={
+                'new_scan_flag':[],
+                'laser_pulse_strength':[],
+                'angle_dg':[],
+                'distance_mm':[],
+                'frequency_hz':[],
+                'rotation_rpm':[]
+                }
         try:
-            for _ in lidar.iter_scans():
-                now = time.time()
+            for m in lidar.iter_measures():
+                
+                now=time.time()
+                
+                # gets lidar mapping data
+                data['new_scan_flag'].append(m[0])
+                data['laser_pulse_strength'].append(m[1])
+                data['angle_dg'].append(round(m[2],3))
+                data['distance_mm'].append(round(m[3],3))
+
+                # gets frequency and velocity
                 if old_t is None:
-                    old_t = now
+                    old_t=now
                     continue
-                delta = now - old_t
-        except:
-            
+                delta=now-old_t
+                data['frequency_hz'].append(round(1/delta,3))
+                data['rotation_rpm'].append(round(60/delta,3))
+                old_t=now
+                
+        except KeyboardInterrupt:
+            print('\nStoping...\n')
+        
+        # converts data object to JSON format and saves into a file
+        path='./output'
+        os.makedirs(path,exist_ok=True)
+        jsonFilePath=os.path.join(path, "lidar-data.json")
+        with open(jsonFilePath, "w") as json_file:
+            json.dump(data, json_file, indent=4)
+        print(f"\nJSON file saved at: {jsonFilePath}\n")
+        
+        lidar.stop()
+        lidar.disconnect()
+                
+Lidar.getLidarData()
