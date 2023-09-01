@@ -54,7 +54,7 @@ class Lidar():
         return lidar,params
     
     @classmethod
-    def getLidarData(cls,saveInDisk=True,enableROS=True,renderPlot=True):
+    def getLidarData(cls,saveInDisk=True,enableROS=True,renderPlot=False):
         """
         Args:
         saveInDisk: if True it generates a json file as output from the fetched Data
@@ -169,9 +169,10 @@ class Lidar():
                     ax.tick_params(axis='both', colors='#00CC00')
                     # plt.legend(('Min','Max'))  # Show the legend
                     plt.show()
-                if __name__ == '__main__':
-                    plot()
-                    
+                plot()
+                # if __name__ == '__main__':
+                #     plot()
+
         if saveInDisk==True:
             # converts data object to JSON format and saves into a file
             path='./output'
@@ -183,5 +184,3 @@ class Lidar():
 
         lidar.stop()
         lidar.disconnect()
-                
-Lidar.getLidarData()
