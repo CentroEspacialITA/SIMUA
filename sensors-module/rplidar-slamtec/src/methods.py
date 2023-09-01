@@ -1,7 +1,13 @@
+import matplotlib.animation as animation
+import matplotlib.pyplot as plt
 from rplidar import RPLidar
+import numpy as np
+import warnings
 import time
 import json
 import os
+
+warnings.filterwarnings("ignore")
 
 class Lidar():
     def __init__(self):
@@ -35,7 +41,7 @@ class Lidar():
          ___/ / /___/ ___ |/ /  / / / / / /___/ /___   
         /____/_____/_/  |_/_/  /_/ /_/ /_____/\____/   
                                                     RPLIDAR
-                                             
+                                            
         [lidar info]
             # model: {lidar.get_info()['model']}
             # firmware: {lidar.get_info()['firmware']}
@@ -48,7 +54,7 @@ class Lidar():
         return lidar,params
     
     @classmethod
-    def getLidarData(cls,saveInDisk=True,enableROS=True,renderPlot=False):
+    def getLidarData(cls,saveInDisk=True,enableROS=True,renderPlot=True):
         """
         Args:
         saveInDisk: if True it generates a json file as output from the fetched Data
@@ -77,7 +83,7 @@ class Lidar():
             refer to `iter_measures` method's documentation.
         """
         
-        lidar,_=cls.lidarParams()
+        lidar,params=cls.lidarParams()
         old_t = None
         valuesList=[]
         data={
@@ -110,16 +116,83 @@ class Lidar():
 
         except KeyboardInterrupt:
             print('\nStoping...\n')
+            if renderPlot==True:
+                
+                try:
+                    print('\nRendering Obtained Data...\n')
+                    DMAX,IMIN,IMAX=params['dmax'],params['imin'],params['imax']
+
+                    def update_line(num,iterator,line,ax):
+                        scan=next(iterator)
+                        offsets=np.array([(np.radians(meas[1]),meas[2]) for meas in scan])
+                        line.set_offsets(offsets)
+                        intens = np.array([meas[0] for meas in scan])
+                        line.set_array(intens)
+
+                        min_dist = np.min(intens)
+                        max_dist = np.max(intens)
+                        legend_text = f'Min: {min_dist:.2f}mm Max: {max_dist:.2f}mm'
+                        ax.legend([legend_text],loc='lower right')
+                        ax.set_xticklabels(['0°','45°','90°',
+                                            '135°','180°','225°',
+                                            '270°','315°'],color='lime')
+                        return line,
+
+                    def plot():
+                        # iterator to gather mapped points (quality,angle,distance)
+                        def itt(mappedPoints):
+                            minLength=5
+                            scanList=[]
+                            for scf,lps,ang,dst in zip(
+                                                        mappedPoints['new_scan_flag'],
+                                                        mappedPoints['laser_pulse_strength'],
+                                                        mappedPoints['angle_dg'],
+                                                        mappedPoints['distance_mm']
+                                                        ):
+                                if scf:
+                                    if len(scanList) > minLength:
+                                        yield scanList
+                                    scanList=[]
+                                if dst > 0:
+                                    scanList.append((lps,ang,dst))
+
+                        fig = plt.figure()
+                        fig.patch.set_facecolor('black')
+
+                        ax = plt.subplot(111,projection='polar')
+                        ax.xaxis.grid(True,color='#00CC00',linestyle='dashed')
+                        ax.yaxis.grid(True,color='#00CC00',linestyle='dashed')
+
+                        ax.set_facecolor('black')
+                        ax.spines['polar'].set_visible(False)
+
+                        line = ax.scatter(
+                                            [0, 0],[0, 0],
+                                            s=5,c=[IMIN, IMAX],
+                                            cmap=plt.cm.Reds_r,lw=0
+                                            )
+                        ax.set_rmax(DMAX)
+                        ax.grid(True,color='lime',linestyle='-')
+                        iterator=itt(mappedPoints=data)
+                        ani = animation.FuncAnimation(fig,update_line,fargs=(iterator,line,ax),interval=50)
+                        ax.tick_params(axis='both', colors='#00CC00')
+                        # plt.legend(('Min','Max'))  # Show the legend
+                        plt.show()
+
+                    if __name__ == '__main__':
+                        plot()
+                except StopIteration:
+                    pass
         
         if saveInDisk==True:
             # converts data object to JSON format and saves into a file
             path='./output'
             os.makedirs(path,exist_ok=True)
             jsonFilePath=os.path.join(path, "lidar-data.json")
-            with open(jsonFilePath, "w") as json_file:
+            with open(jsonFilePath,"w") as json_file:
                 json.dump(data, json_file, indent=4)
             print(f"\nJSON file saved at: {jsonFilePath}\n")
-        
+
         lidar.stop()
         lidar.disconnect()
                 

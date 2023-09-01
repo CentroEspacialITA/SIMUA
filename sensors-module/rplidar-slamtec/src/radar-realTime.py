@@ -40,7 +40,7 @@ def run():
     ax.spines['polar'].set_visible(False)  # Hide the radial lines
 
     line = ax.scatter([0, 0], [0, 0], s=5, c=[IMIN, IMAX],
-                           cmap=plt.cm.Reds_r, lw=0)  # Use 'Reds' colormap
+                        cmap=plt.cm.Reds_r, lw=0)  # Use 'Reds' colormap
     ax.set_rmax(DMAX)
     ax.grid(True, color='lime', linestyle='-')  # Use lime color for the radar grid
 
