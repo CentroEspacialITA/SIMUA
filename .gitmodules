@@ -1,0 +1,3 @@
+[submodule "sensors-module/rplidar-slamtec/src/ros2_custom_msg"]
+	path = sensors-module/rplidar-slamtec/src/ros2_custom_msg
+	url = https://github.com/JoaoCioffi/ros2_custom_msg.git
