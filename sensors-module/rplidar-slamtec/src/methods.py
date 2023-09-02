@@ -54,7 +54,7 @@ class Lidar():
         return lidar,params
     
     @classmethod
-    def getLidarData(cls,saveInDisk=True,enableROS=True,renderPlot=False):
+    def getLidarData(cls,saveInDisk=True,renderPlot=False):
         """
         Args:
         saveInDisk: if True it generates a json file as output from the fetched Data
@@ -95,13 +95,14 @@ class Lidar():
                 'rotation_rpm':[]
                 }
         try:
+            
             for m in lidar.iter_measures():
                 
                 now=time.time()
                 
                 # gets lidar mapping data
-                data['new_scan_flag'].append(m[0])
-                data['laser_pulse_strength'].append(m[1])
+                data['new_scan_flag'].append(bool(m[0]))
+                data['laser_pulse_strength'].append(int(m[1]))
                 data['angle_dg'].append(round(m[2],3))
                 data['distance_mm'].append(round(m[3],3))
 
@@ -116,6 +117,9 @@ class Lidar():
 
         except KeyboardInterrupt:
             print('\nStoping...\n')
+            lidar.stop()
+            lidar.disconnect()
+
             if renderPlot==True:
                 print('\nRendering Obtained Data...\n')
                 DMAX,IMIN,IMAX=params['dmax'],params['imin'],params['imax']
@@ -167,12 +171,9 @@ class Lidar():
                     iterator=itt(mappedPoints=data)
                     ani = animation.FuncAnimation(fig,update_line,fargs=(iterator,line,ax),interval=50)
                     ax.tick_params(axis='both', colors='#00CC00')
-                    # plt.legend(('Min','Max'))  # Show the legend
                     plt.show()
                 plot()
-                # if __name__ == '__main__':
-                #     plot()
-
+                
         if saveInDisk==True:
             # converts data object to JSON format and saves into a file
             path='./output'
@@ -181,6 +182,3 @@ class Lidar():
             with open(jsonFilePath,"w") as json_file:
                 json.dump(data, json_file, indent=4)
             print(f"\nJSON file saved at: {jsonFilePath}\n")
-
-        lidar.stop()
-        lidar.disconnect()
