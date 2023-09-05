@@ -143,7 +143,7 @@ try:
             images = np.hstack((resized_color_data, depth_colormap))
         else:
             images = np.hstack((color_data, depth_colormap))
-
+        
         # Show images
         cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
         cv2.imshow('RealSense', images)
