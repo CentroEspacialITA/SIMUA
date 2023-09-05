@@ -95,8 +95,11 @@ while rclpy.ok():
                     old_t=now
                     continue
                 delta=now-old_t
-                data['frequency_hz'].append(round(1/delta,3))
-                data['rotation_rpm'].append(round(60/delta,3))
+                F=1/delta
+                rotationSpeed=60*delta
+                
+                data['frequency_hz'].append(round(F,3))
+                data['rotation_rpm'].append(round(rotationSpeed,3))
                 old_t=now
 
                 # publishing data with ROS
@@ -123,6 +126,7 @@ while rclpy.ok():
             
             lidar.stop()
             lidar.disconnect()
+            del m,now,old_t,now,valuesList,clock,lidar
 
             if userParams['renderPlot'].lower()=='y':
                 print('\nRendering Obtained Data...\n')
