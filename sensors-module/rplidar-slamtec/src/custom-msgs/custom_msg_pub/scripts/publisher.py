@@ -32,6 +32,10 @@ warnings.filterwarnings("ignore")
 
 # initialize the LiDAR object
 lidar=RPLidar("/dev/ttyUSB0")
+lidar.disconnect()
+lidar.connect()
+lidar.stop_motor()
+lidar.stop()
 lidar.start_motor()
 lidar.clean_input()
 
@@ -77,7 +81,7 @@ while rclpy.ok():
     try:
             clock=0 #clock for limit the ROS publishing rate
             for m in lidar.iter_measures():
-                
+                lidar.clean_input()
                 now=time.time()
                 
                 # gets lidar mapping data
